@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 //     res.render('maintenance.hbs');
 // });
 /*Since there is no next() in previous app.use() the next line needs to go after rendering maintenance.hbs so that it will not load when we are in maintenance mode. Middleware takes precedence.*/
-app.use(express.static(__dirname + '/public')); //middleware to server static data, __dirname__ is path to the main project folder.
+app.use(express.static(__dirname + '/public')); //middleware to server static data, __dirname is path to the main project folder.
 
 /** partial function that allows DRY by not having to place it into every res.render function.*/
 hbs.registerHelper('getCurrentYear', () => new Date().getFullYear());
@@ -48,6 +48,13 @@ app.get('/', (req, res) => {
     res.render('home.hbs', {
         'pageTitle': 'Home Page',
         'welcomeMessage': 'Welcome to my website!'
+    });
+});
+
+app.get('/project', (req, res) => {
+    res.render('project.hbs', {
+        'pageTitle': 'Projects',
+        'projectMessage': 'Hard core node apps go here.'
     });
 });
 
